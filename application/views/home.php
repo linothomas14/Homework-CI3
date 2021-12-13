@@ -1,5 +1,4 @@
 <div class="container">
-	<?= base_url() ?>
 	<h1 class="text-center p-3">Assignment 3IA01 🔥</h1>
 	<a class="btn btn-info mb-3" href="<?= base_url('index.php/homework/tambah') ?>">Add Assignment</a>
 	<table class="table table-striped table-hover">
