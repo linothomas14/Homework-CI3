@@ -4,30 +4,34 @@
 	<table class="table table-striped table-hover">
 		<thead class="table-success">
 			<tr>
-				<th scope="col">No</th>
-				<th scope="col">Deadline</th>
-				<th scope="col">Title</th>
-				<th scope="col">Subject</th>
+				<th id="no">No</th>
+				<th>Deadline</th>
+				<th>Subject</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Posted by</th>
+				<th colspan="2"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td colspan="2">Larry the Bird</td>
-				<td>@twitter</td>
-			</tr>
+			<?php
+			$no = 1;
+			foreach ($assignments as $data) : ?>
+				<tr>
+					<td class=" text-center"><?= $no++ ?></td>
+					<td><?= $data['deadline'] ?></td>
+					<td><?= $data['subject'] ?></td>
+					<td><?= $data['title'] ?></td>
+					<td style="max-width: 350px;"><?= $data['description'] ?></td>
+					<td>Yulyano Thomas Djaya</td>
+					<td class="align-middle text-center">
+						<a class="align-middle btn btn-success">Edit</a>
+
+						<a href="<?= base_url('homework/delete/' . $data['id']) ?>" onclick="return confirm('Data akan dihapus. Anda yakin?')" class="align-middle btn btn-danger">Hapus</a>
+					</td>
+				</tr>
+			<?php endforeach ?>
+
 		</tbody>
 	</table>
 </div>
