@@ -1,6 +1,10 @@
 <div class="container">
 	<h1 class="text-center p-3">Assignment 3IA01 🔥</h1>
 	<a class="btn btn-info mb-3" href="<?= base_url('homework/tambah') ?>">Add Assignment</a>
+	<?php 
+	$username = $this->session->userdata('username');
+	echo "rifqi";
+	echo $username; ?>
 	<table class="table table-striped table-hover">
 		<thead class="table-success">
 			<tr>

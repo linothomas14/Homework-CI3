@@ -10,19 +10,68 @@ class Homework extends CI_Controller
 	}
 	public function index()
 	{
-		$data['assignments'] = $this->M_homework->read();
-		$this->load->view('header', $data);
-		$this->load->view('home');
-		$this->load->view('footer');
+		if ($this->session->userdata('login') == 1) {
+			$data['assignments'] = $this->M_homework->read();
+			$this->load->view('core/header', $data);
+			$this->load->view('contents/home');
+			$this->load->view('core/footer');
+		} else {
+			$this->session->set_flashdata('belum_login', '2');
+			redirect('homework/login', 'refresh');
+		}
+	}
+
+	public function login()
+	{
+		$this->load->view('core/header-login');
+		$this->load->view('login/login');
+		$this->load->view('core/footer');
+		if (isset($_POST['login'])) {
+			$this->M_homework->validateLogin();
+		}
+	}
+
+	public function registration()
+	{
+		$this->load->view('core/header-login');
+		$this->load->view('login/registration');
+		$this->load->view('core/footer');
+		if (isset($_POST['submit'])) {
+			$this->M_homework->registration();
+		}
+	}
+
+	public function biodata()
+	{
+		if ($this->session->flashdata('register') == 'true') {
+			$this->load->view('core/header-login');
+			$this->load->view('login/fillBiodata');
+			$this->load->view('core/footer');
+			if (isset($_POST['submit-biodata'])) {
+				$this->M_homework->fillBiodata();
+			}
+		} else {
+			redirect('homework/registration', 'refresh');
+		}
 	}
 
 	public function tambah()
 	{
-		$this->load->view('header');
-		$this->load->view('tambah');
-		$this->load->view('footer');
+		$this->load->view('core/header');
+		$this->load->view('contents/tambah');
+		$this->load->view('core/footer');
 		if (isset($_POST['submit'])) {
 			$this->M_homework->create();
+		}
+	}
+
+	public function test()
+	{
+		$this->load->view('core/header-login');
+		$this->load->view('login/registration');
+		$this->load->view('core/footer');
+		if (isset($_POST['submit'])) {
+			$this->M_homework->registration();
 		}
 	}
 
