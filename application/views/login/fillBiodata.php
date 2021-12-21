@@ -12,7 +12,7 @@
 
         <div class="form-group">
           <p>NPM</p>
-          <input class="form-control" type="text" name="npm" placeholder="NPM" required>
+          <input class="form-control" type="text" name="npm" placeholder="NPM" maxlength="8" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" required>
         </div>
 
         <div class="form-group">
