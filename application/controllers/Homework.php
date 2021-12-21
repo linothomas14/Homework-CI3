@@ -11,7 +11,11 @@ class Homework extends CI_Controller
 	public function index()
 	{
 		if ($this->session->userdata('login') == 1) {
-			$data['assignments'] = $this->M_homework->read();
+			$data['assignments'] = $this->M_homework->read()[0];
+			$data['biodata'] = $this->M_homework->read()[1];
+
+			// $this->db->select('kelas');
+			// $data['nama'] = $this->db->get_where('biodata', ['username' => $this->session->userdata('username')]);
 			$this->load->view('core/header', $data);
 			$this->load->view('contents/home');
 			$this->load->view('core/footer');
@@ -35,16 +39,32 @@ class Homework extends CI_Controller
 
 	public function member()
 	{
-		$this->load->view('core/header');
-		$this->load->view('contents/member');
-		$this->load->view('core/footer');
+		if ($this->session->userdata('login') == 1) {
+			$data['assignments'] = $this->M_homework->read()[0];
+			$data['biodata'] = $this->M_homework->read()[1];
+
+			$this->load->view('core/header', $data);
+			$this->load->view('contents/member');
+			$this->load->view('core/footer');
+		} else {
+			$this->session->set_flashdata('belum_login', '2');
+			redirect('homework/login', 'refresh');
+		}
 	}
 
 	public function schedule()
 	{
-		$this->load->view('core/header');
-		$this->load->view('contents/schedule');
-		$this->load->view('core/footer');
+		if ($this->session->userdata('login') == 1) {
+			$data['assignments'] = $this->M_homework->read()[0];
+			$data['biodata'] = $this->M_homework->read()[1];
+
+			$this->load->view('core/header', $data);
+			$this->load->view('contents/schedule');
+			$this->load->view('core/footer');
+		} else {
+			$this->session->set_flashdata('belum_login', '2');
+			redirect('homework/login', 'refresh');
+		}
 	}
 
 

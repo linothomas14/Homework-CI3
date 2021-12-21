@@ -6,9 +6,14 @@ class M_homework extends CI_Model
     function read()
     {
 
-        // $this->db->where('kelas', $this->session->userdata('kelas'));
-        return $this->db->get('assignments')->result_array();
+        $this->db->where('kelas', $this->session->userdata('kelas'));
+        $output = array(
+            $this->db->get('assignments')->result_array(),
+            $this->db->get_where('biodata', ['username' => $this->session->userdata('username')])->row_array(),
+        );
+        return $output;
     }
+
 
     function registration()
     {
@@ -51,9 +56,9 @@ class M_homework extends CI_Model
             'kelas' => $kelas,
         ];
         $this->db->insert('biodata', $userData);
-        $this->session->set_userdata('login', '1');
+
         if ($this->db->affected_rows() > 0) {
-            redirect('homework', 'refresh');
+            redirect('', 'refresh');
         }
     }
 
@@ -62,11 +67,13 @@ class M_homework extends CI_Model
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $user = $this->db->get_where('users', ['username' => $username])->row_array();
+        $kelas = $this->db->get_where('biodata', ['username' => $username])->row_array();
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 $this->session->set_userdata('login', '1');
                 $this->session->set_userdata('username', $user['username']);
+                $this->session->set_userdata('kelas', $kelas['kelas']);
                 redirect('', 'refresh');
             }
         } else {
@@ -80,12 +87,15 @@ class M_homework extends CI_Model
         $subject = $this->input->post('subject');
         $description = $this->input->post('description');
         $deadline = $this->input->post('deadline');
-
+        $username = $this->session->userdata('username');
+        $poster = $this->db->get_where('biodata', ['username' => $username])->row_array();
         $data = [
             'title' => $title,
             'subject' => $subject,
             'description' => $description,
             'deadline' => $deadline,
+            'kelas' => $this->session->userdata('kelas'),
+            'poster' => $poster['nama'],
         ];
 
         $this->db->insert('assignments', $data);
@@ -107,10 +117,5 @@ class M_homework extends CI_Model
     {
         $this->session->sess_destroy();
         redirect('homework/login');
-    }
-    function test()
-    {
-        $this->session->sess_destroy();
-        redirect('', 'refresh');
     }
 }

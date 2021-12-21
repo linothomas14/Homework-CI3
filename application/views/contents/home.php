@@ -1,5 +1,5 @@
 <div class="container">
-	<h1 class="text-center p-3">Assignment 3IA01 🔥</h1>
+	<h1 class="text-center p-3">Assignment <?= $this->session->userdata('kelas'); ?> 🔥</h1>
 	<a class="btn btn-info mb-3" href="<?= base_url('homework/tambah') ?>">Add Assignment</a>
 
 
@@ -18,6 +18,7 @@
 		<tbody>
 			<?php
 			$no = 1;
+
 			foreach ($assignments as $data) : ?>
 				<tr>
 					<td class=" text-center"><?= $no++ ?></td>
@@ -25,7 +26,7 @@
 					<td><?= $data['subject'] ?></td>
 					<td><?= $data['title'] ?></td>
 					<td style="max-width: 350px;"><?= $data['description'] ?></td>
-					<td>Yulyano Thomas Djaya</td>
+					<td><?= $data['poster'] ?></td>
 					<td class="align-middle text-center">
 						<a class="align-middle btn btn-success">Edit</a>
 
