@@ -5,6 +5,8 @@ class M_homework extends CI_Model
 {
     function read()
     {
+
+        // $this->db->where('kelas', $this->session->userdata('kelas'));
         return $this->db->get('assignments')->result_array();
     }
 

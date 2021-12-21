@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Praktikum PWEB</h5>
+    <h5 class="my-0 mr-md-auto font-weight-normal">My Assignments</h5>
 </div>
 
 <div class="container">
@@ -8,10 +8,11 @@
             <div class="card bg-light my-5">
                 <div class="card-header text-center">Login Form</div>
                 <div class="card-body">
-                    <h5 class="card-title">Praktikum Pemrograman Web</h5>
+                    <h5 class="card-title">My Assignments</h5>
                     <p class="card-text">Masukan username dan password untuk mengakses halaman.</p>
 
-                    <?php if ($this->session->flashdata('salah_login')) : ?> <div class="alert alert-danger" role="alert">
+                    <?php if ($this->session->flashdata('salah_login')) : ?>
+                        <div class="alert alert-danger" role="alert">
                             Username atau Password Salah!
                         </div>
                     <?php elseif ($this->session->flashdata('belum_login')) : ?>

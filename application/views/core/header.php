@@ -31,10 +31,10 @@ $username = $this->session->userdata('username');
                         <a class="nav-link active" aria-current="page" href="<?= base_url() ?> ">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Schedule</a>
+                        <a class="nav-link" href="<?= base_url('homework/schedule') ?>">Schedule</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Member</a>
+                        <a class="nav-link" href="<?= base_url('homework/member') ?>">Member</a>
                     </li>
                 </ul>
 

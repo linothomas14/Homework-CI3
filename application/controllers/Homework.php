@@ -31,8 +31,22 @@ class Homework extends CI_Controller
 		if (isset($_POST['login'])) {
 			$this->M_homework->validateLogin();
 		}
-		var_dump($this->session->all_userdata());
 	}
+
+	public function member()
+	{
+		$this->load->view('core/header');
+		$this->load->view('contents/member');
+		$this->load->view('core/footer');
+	}
+
+	public function schedule()
+	{
+		$this->load->view('core/header');
+		$this->load->view('contents/schedule');
+		$this->load->view('core/footer');
+	}
+
 
 	public function registration()
 	{
