@@ -19,6 +19,8 @@ class Homework extends CI_Controller
 			$this->session->set_flashdata('belum_login', '2');
 			redirect('homework/login', 'refresh');
 		}
+
+		var_dump($this->session->all_userdata());
 	}
 
 	public function login()
@@ -29,6 +31,7 @@ class Homework extends CI_Controller
 		if (isset($_POST['login'])) {
 			$this->M_homework->validateLogin();
 		}
+		var_dump($this->session->all_userdata());
 	}
 
 	public function registration()
@@ -79,5 +82,11 @@ class Homework extends CI_Controller
 	{
 		$this->M_homework->hapus($id);
 		redirect('homework', 'refresh');
+	}
+
+	public function logout()
+	{
+		session_destroy();
+		redirect('homework/login', 'refresh');
 	}
 }

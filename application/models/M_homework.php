@@ -50,7 +50,7 @@ class M_homework extends CI_Model
         ];
         $this->db->insert('biodata', $userData);
         $this->session->set_userdata('login', '1');
-        if ($this->db->affected_rows() > 0){
+        if ($this->db->affected_rows() > 0) {
             redirect('homework', 'refresh');
         }
     }
@@ -69,7 +69,6 @@ class M_homework extends CI_Model
             }
         } else {
             $this->session->set_flashdata('salah_login', '1');
-            redirect('homework/login', 'refresh');
         }
     }
 
@@ -100,5 +99,16 @@ class M_homework extends CI_Model
         if ($this->db->affected_rows() > 0) {
             redirect('homework', 'refresh');
         }
+    }
+
+    function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('homework/login');
+    }
+    function test()
+    {
+        $this->session->sess_destroy();
+        redirect('', 'refresh');
     }
 }

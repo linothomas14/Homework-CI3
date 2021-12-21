@@ -11,15 +11,14 @@
                     <h5 class="card-title">Praktikum Pemrograman Web</h5>
                     <p class="card-text">Masukan username dan password untuk mengakses halaman.</p>
 
-                    <!-- <?php if ($this->session->flashdata('salah_login')) : ?>
-                        <div class="alert alert-danger" role="alert">
+                    <?php if ($this->session->flashdata('salah_login')) : ?> <div class="alert alert-danger" role="alert">
                             Username atau Password Salah!
                         </div>
                     <?php elseif ($this->session->flashdata('belum_login')) : ?>
                         <div class="alert alert-danger" role="alert">
                             Anda belum melakukan Login!
                         </div>
-                    <?php endif ?> -->
+                    <?php endif ?>
 
                     <form action="" method="post" class="needs-validation" novalidate>
                         <div class="form-group">
