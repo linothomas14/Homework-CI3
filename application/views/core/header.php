@@ -1,6 +1,10 @@
 <?php
 $username = $this->session->userdata('username');
-$nama = $biodata['nama'];
+$user_login = $this->db->get_where('biodata', ['username' => $username])->row_array();
+// echo '<pre>';
+// var_dump($user_login);
+// // var_dump($assignments);
+// echo '</pre>';
 
 ?>
 <html lang="en">
@@ -8,7 +12,7 @@ $nama = $biodata['nama'];
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tugas <?= $biodata['kelas'] ?></title>
+    <title>Tugas <?= $user_login['kelas'] ?></title>
 
     <!-- Bootstrap core CSS-->
     <link type="text/css" rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
@@ -22,7 +26,7 @@ $nama = $biodata['nama'];
 
     <form action="m-0 p-0" method="GET">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#"><?= $biodata['kelas'] ?></a>
+            <a class="navbar-brand" href="#"><?= $user_login['kelas'] ?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,14 +37,11 @@ $nama = $biodata['nama'];
                         <a class="nav-link active" aria-current="page" href="<?= base_url() ?> ">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('homework/schedule') ?>">Schedule</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="<?= base_url('homework/member') ?>">Member</a>
                     </li>
                 </ul>
 
-                <p id="user">Hi, <?= $nama ?> 😂</p>
+                <p id="user">Hi, <?= $user_login['nama'] ?> 😂</p>
 
 
                 <a class=" btn btn-outline-danger  my-sm-0" href="<?= base_url('homework/logout') ?>" name="logout">Logout</a>

@@ -9,11 +9,10 @@ class M_homework extends CI_Model
         $this->db->where('kelas', $this->session->userdata('kelas'));
         $output = array(
             $this->db->get('assignments')->result_array(),
-            $this->db->get_where('biodata', ['username' => $this->session->userdata('username')])->row_array(),
+            $this->db->get('biodata')->result_array(),
         );
         return $output;
     }
-
 
     function registration()
     {
@@ -53,7 +52,7 @@ class M_homework extends CI_Model
             'username' => $username,
             'nama' => $nama,
             'npm' => $npm,
-            'kelas' => $kelas,
+            'kelas' => strtoupper($kelas),
         ];
         $this->db->insert('biodata', $userData);
 

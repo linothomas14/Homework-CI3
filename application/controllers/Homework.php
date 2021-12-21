@@ -23,8 +23,6 @@ class Homework extends CI_Controller
 			$this->session->set_flashdata('belum_login', '2');
 			redirect('homework/login', 'refresh');
 		}
-
-		var_dump($this->session->all_userdata());
 	}
 
 	public function login()
@@ -45,21 +43,6 @@ class Homework extends CI_Controller
 
 			$this->load->view('core/header', $data);
 			$this->load->view('contents/member');
-			$this->load->view('core/footer');
-		} else {
-			$this->session->set_flashdata('belum_login', '2');
-			redirect('homework/login', 'refresh');
-		}
-	}
-
-	public function schedule()
-	{
-		if ($this->session->userdata('login') == 1) {
-			$data['assignments'] = $this->M_homework->read()[0];
-			$data['biodata'] = $this->M_homework->read()[1];
-
-			$this->load->view('core/header', $data);
-			$this->load->view('contents/schedule');
 			$this->load->view('core/footer');
 		} else {
 			$this->session->set_flashdata('belum_login', '2');
