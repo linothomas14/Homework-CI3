@@ -1,11 +1,6 @@
 <?php
 $username = $this->session->userdata('username');
 $user_login = $this->db->get_where('biodata', ['username' => $username])->row_array();
-// echo '<pre>';
-// var_dump($user_login);
-// // var_dump($assignments);
-// echo '</pre>';
-
 ?>
 <html lang="en">
 
@@ -34,10 +29,10 @@ $user_login = $this->db->get_where('biodata', ['username' => $username])->row_ar
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?= base_url() ?> ">Home</a>
+                        <a class="nav-link <?php if($this->uri->segment(2) == ""){echo 'active';}?>" aria-current="page" href="<?= base_url() ?> ">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('homework/member') ?>">Member</a>
+                        <a class="nav-link <?php if($this->uri->segment(2) == "member"){echo 'active';}?>" href="<?= base_url('homework/member') ?>">Member</a>
                     </li>
                 </ul>
 

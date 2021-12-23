@@ -34,6 +34,7 @@ class Homework extends CI_Controller
 			$this->M_homework->validateLogin();
 		}
 		if (isset($_POST['register'])) {
+			$this->session->sess_destroy();
 			$this->M_homework->register();
 		}
 	}
@@ -113,6 +114,10 @@ class Homework extends CI_Controller
 	}
 	public function edit($id)
 	{
+		$id_existed= $this->db->get_where('assignments', ['id' => $id])->row_array();
+		if(!$id_existed){
+			redirect('homework', 'refresh');
+		}
 		if ($this->session->userdata('login') == '1') {
 			$data['assignments'] = $this->M_homework->get_row($id);
 			$this->load->view('core/header', $data);

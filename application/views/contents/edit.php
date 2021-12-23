@@ -1,3 +1,8 @@
+<?php 
+if ($assignments['kelas'] != $this->session->userdata('kelas')){
+    redirect('homework', 'refresh');
+}
+?>
 <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-md-6">

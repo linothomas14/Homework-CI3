@@ -5,6 +5,7 @@
                 <h2 class="mt-3 text-center">Create Account</h2>
             </div>
             <?php if ($this->session->flashdata('username') == 'Exists') : ?>
+                <br>
                 <div class="alert alert-warning" role="alert">
                     Username already exists!
                 </div>

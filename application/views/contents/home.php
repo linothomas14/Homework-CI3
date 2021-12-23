@@ -29,7 +29,6 @@
 					<td><?= $data['poster'] ?></td>
 					<td class="align-middle text-center">
 						<a href="<?= base_url('homework/edit/' . $data['id']) ?>" class="align-middle btn btn-success">Edit</a>
-
 						<a href="<?= base_url('homework/delete/' . $data['id']) ?>" onclick="return confirm('Data akan dihapus. Anda yakin?')" class="align-middle btn btn-danger">Hapus</a>
 					</td>
 				</tr>
