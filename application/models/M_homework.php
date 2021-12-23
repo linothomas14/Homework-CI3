@@ -13,8 +13,11 @@ class M_homework extends CI_Model
         );
         return $output;
     }
-
-    function registration()
+    function get_row($id)
+    {
+        return $this->db->get_where('assignments', ['id' => $id])->row_array();
+    }
+    function register()
     {
         $username = $this->input->post('username');
         $username_exist = $this->db->get_where('users', ['username' => $username])->row_array();
@@ -24,7 +27,7 @@ class M_homework extends CI_Model
 
         if ($username_exist) {
             $this->session->set_flashdata('username', 'Exists');
-            redirect('homework/registration', 'refresh');
+            redirect('homework/register', 'refresh');
         } else {
             $userData = [
                 'username' => $username,
@@ -35,7 +38,9 @@ class M_homework extends CI_Model
             // Session data
             $this->session->set_userdata('username', $username);
             $this->session->set_flashdata('register', 'true');
+            echo "Test";
             if ($this->db->affected_rows() > 0) {
+
                 redirect('homework/biodata', 'refresh');
             }
         }
@@ -55,7 +60,7 @@ class M_homework extends CI_Model
             'kelas' => strtoupper($kelas),
         ];
         $this->db->insert('biodata', $userData);
-
+        session_destroy();
         if ($this->db->affected_rows() > 0) {
             redirect('', 'refresh');
         }
@@ -116,5 +121,31 @@ class M_homework extends CI_Model
     {
         $this->session->sess_destroy();
         redirect('homework/login');
+    }
+
+    function update()
+    {
+        $title = $this->input->post('title');
+        $subject = $this->input->post('subject');
+        $deadline = $this->input->post('deadline');
+        $description = $this->input->post('description');
+
+        $data = [
+            'title' => $title,
+            'subject' => $subject,
+            'deadline' => $deadline,
+            'description' => $description,
+
+        ];
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('assignments', $data);
+        if ($this->db->affected_rows() > 0) {
+
+            // masih error disini, dia ga masuk ke if yang affected row
+
+            $this->session->set_flashdata('pesan', 'Diubah');
+            redirect('homework', 'refresh');
+        }
     }
 }

@@ -33,6 +33,9 @@ class Homework extends CI_Controller
 		if (isset($_POST['login'])) {
 			$this->M_homework->validateLogin();
 		}
+		if (isset($_POST['register'])) {
+			$this->M_homework->register();
+		}
 	}
 
 	public function member()
@@ -51,13 +54,14 @@ class Homework extends CI_Controller
 	}
 
 
-	public function registration()
+	public function register()
 	{
+
 		$this->load->view('core/header-login');
-		$this->load->view('login/registration');
+		$this->load->view('login/register');
 		$this->load->view('core/footer');
 		if (isset($_POST['submit'])) {
-			$this->M_homework->registration();
+			$this->M_homework->register();
 		}
 	}
 
@@ -71,39 +75,55 @@ class Homework extends CI_Controller
 				$this->M_homework->fillBiodata();
 			}
 		} else {
-			redirect('homework/registration', 'refresh');
+			redirect('homework/register', 'refresh');
 		}
 	}
 
 	public function tambah()
 	{
-		$this->load->view('core/header');
-		$this->load->view('contents/tambah');
-		$this->load->view('core/footer');
-		if (isset($_POST['submit'])) {
-			$this->M_homework->create();
+		if ($this->session->userdata('login') == 1) {
+			$this->load->view('core/header');
+			$this->load->view('contents/tambah');
+			$this->load->view('core/footer');
+			if (isset($_POST['submit'])) {
+				$this->M_homework->create();
+			}
+		} else {
+			$this->session->set_flashdata('belum_login', '2');
+			redirect('homework/login', 'refresh');
 		}
 	}
 
-	public function test()
-	{
-		$this->load->view('core/header-login');
-		$this->load->view('login/registration');
-		$this->load->view('core/footer');
-		if (isset($_POST['submit'])) {
-			$this->M_homework->registration();
-		}
-	}
 
 	public function delete($id)
 	{
-		$this->M_homework->hapus($id);
-		redirect('homework', 'refresh');
+		if ($this->session->userdata('login') == 1) {
+			$this->M_homework->hapus($id);
+			redirect('homework', 'refresh');
+		} else {
+			$this->session->set_flashdata('belum_login', '2');
+			redirect('homework/login', 'refresh');
+		}
 	}
 
 	public function logout()
 	{
 		session_destroy();
 		redirect('homework/login', 'refresh');
+	}
+	public function edit($id)
+	{
+		if ($this->session->userdata('login') == '1') {
+			$data['assignments'] = $this->M_homework->get_row($id);
+			$this->load->view('core/header', $data);
+			$this->load->view('contents/edit');
+			$this->load->view('core/footer');
+			if (isset($_POST['edit'])) {
+				$this->M_homework->update();
+			}
+		} else {
+			$this->session->set_flashdata('belum_login', '2');
+			redirect('homework/login', 'refresh');
+		}
 	}
 }

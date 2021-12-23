@@ -9,6 +9,7 @@
     text-align: center;
 }
 
+
 #btn-submit{
     width: 100%;
 }
@@ -28,3 +29,13 @@
 #user{
     margin: 10px;
 }
+#submit-login{
+    width:100%;
+   
+    
+}
+#submit-register{
+    width: 200px;
+    border-radius: 30px;
+}
+
