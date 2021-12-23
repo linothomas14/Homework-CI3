@@ -6,7 +6,7 @@
     <div class="row justify-content-md-center">
         <div class="col-md-6">
             <div class="card bg-light my-5">
-                <div class="card-header text-center">Login Form</div>
+                <div class="card-header text-center bg-primary text-light" id="">Login Form</div>
                 <div class="card-body">
                     <h5 class="card-title">My Assignments</h5>
                     <p class="card-text">Masukan username dan password untuk mengakses halaman.</p>
@@ -37,8 +37,14 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary text-center px-3 py-2" name="login">Login</button>
+                            <button type="submit" class="btn btn-primary text-center px-3 py-2" name="login" id="submit-login">Login</button>
+
                         </div>
+                        <div class="text-center mt-3">
+
+                            <button type="submit" class="btn btn-success text-center px-3 py-2" name="register" id="submit-register">Create New Account</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
