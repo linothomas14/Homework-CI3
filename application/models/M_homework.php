@@ -60,7 +60,7 @@ class M_homework extends CI_Model
             'kelas' => strtoupper($kelas),
         ];
         $this->db->insert('biodata', $userData);
-        session_destroy();
+        $this->session->sess_destroy();
         if ($this->db->affected_rows() > 0) {
             redirect('', 'refresh');
         }
@@ -129,13 +129,14 @@ class M_homework extends CI_Model
         $subject = $this->input->post('subject');
         $deadline = $this->input->post('deadline');
         $description = $this->input->post('description');
+        $username = $this->session->userdata('username');
+        $poster = $this->db->get_where('biodata', ['username' => $username])->row_array();
 
         $data = [
             'title' => $title,
             'subject' => $subject,
             'deadline' => $deadline,
             'description' => $description,
-
         ];
 
         $this->db->where('id', $this->input->post('id'));

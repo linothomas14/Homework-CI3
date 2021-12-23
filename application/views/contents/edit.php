@@ -5,9 +5,9 @@
                 <div class="card-header text-center">Edit Data</div>
                 <div class="card-body">
                     <form action="" method="post" class="needs-validation" novalidate>
+                        <?php var_dump($assignments) ?>
                         <input type="" name="id_assignment" value="<?= $assignments['id'] ?>">
                         <div class="form-group">
-
                             <label for="nama_mhs">Title</label>
                             <input type="text" class="form-control" name="title" id="title" placeholder="Masukkan Title Assingment" autocomplete="off" required value="<?= $assignments['title'] ?>">
                         </div>
