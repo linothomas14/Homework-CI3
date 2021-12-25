@@ -2,9 +2,8 @@
 
 $kelas = $this->session->userdata('kelas');
 
-$member_login = $this->db->get_where('biodata', ['kelas' => $kelas])->result_array();
+$member_login = $this->db->order_by("nama", "ASC")->get_where('biodata', ['kelas' => $kelas])->result_array();
 
-// var_dump($member_login);
 ?>
 
 <div class="container">

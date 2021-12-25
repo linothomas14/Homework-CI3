@@ -12,7 +12,7 @@
 				<th>Title</th>
 				<th>Description</th>
 				<th>Posted by</th>
-				<th colspan="2"></th>
+				<th colspan="2">Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,8 +26,8 @@
 					<td><?= $data['subject'] ?></td>
 					<td><?= $data['title'] ?></td>
 					<td style="max-width: 350px;"><?= $data['description'] ?></td>
-					<td><?= $data['poster'] ?></td>
-					<td class="align-middle text-center">
+					<td class="pr-2"><?= $data['poster'] ?></td>
+					<td class="align-middle text-center px-3" style="min-width: 170px;">
 						<a href="<?= base_url('homework/edit/' . $data['id']) ?>" class="align-middle btn btn-success">Edit</a>
 						<a href="<?= base_url('homework/delete/' . $data['id']) ?>" onclick="return confirm('Data akan dihapus. Anda yakin?')" class="align-middle btn btn-danger">Hapus</a>
 					</td>

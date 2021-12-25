@@ -1,19 +1,13 @@
 .form-group p{
     margin-bottom:5px;
 }
-
 #no{
-    /* max-width: 10px; */
-
     padding: auto 0;
     text-align: center;
 }
-
-
 #btn-submit{
     width: 100%;
 }
-
 .banner{
     color: white;
     position: relative;
@@ -25,14 +19,11 @@
     align-items: center;
     text-align: center;
 }
-
 #user{
     margin: 10px;
 }
 #submit-login{
     width:100%;
-   
-    
 }
 #submit-register{
     width: 200px;
