@@ -15,32 +15,29 @@
                         <div class="alert alert-danger" role="alert">
                             Username atau Password Salah!
                         </div>
-                    <?php elseif ($this->session->flashdata('belum_login')) : ?>
+                    <?php endif ?>
+                    <?php if ($this->session->flashdata('belum_login')) : ?>
                         <div class="alert alert-danger" role="alert">
                             Anda belum melakukan Login!
                         </div>
                     <?php endif ?>
 
-                    <form action="" method="post" class="needs-validation" novalidate>
+                    <form action="" method="post" class="needs-validation">
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" name="username" id="username" placeholder="Masukan username" autocomplete="off" required>
-                            <div class="invalid-feedback">
-                                Anda belum memasukan username.
-                            </div>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="Masukan password" autocomplete="off" required>
-                            <div class="invalid-feedback">
-                                Anda belum memasukan password.
-                            </div>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary text-center px-3 py-2" name="login" id="submit-login">Login</button>
 
                         </div>
                         <hr>
+                    </form>
+                    <form action="" method="post" class="needs-validation" novalidate>
                         <div class="text-center mt-3">
                             <button type="submit" class="btn btn-success text-center px-3 py-2" name="register" id="submit-register">Create New Account</button>
                         </div>

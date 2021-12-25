@@ -7,7 +7,7 @@ class M_homework extends CI_Model
     {
         $this->db->where('kelas', $this->session->userdata('kelas'));
         $output = array(
-            $this->db->get('assignments')->result_array(),
+            $this->db->order_by("deadline", "desc")->get('assignments')->result_array(),
             $this->db->get('biodata')->result_array(),
         );
         return $output;
@@ -37,7 +37,6 @@ class M_homework extends CI_Model
             // Session data
             $this->session->set_userdata('username', $username);
             $this->session->set_flashdata('register', 'true');
-            echo "Test";
             if ($this->db->affected_rows() > 0) {
 
                 redirect('homework/biodata', 'refresh');
@@ -72,13 +71,12 @@ class M_homework extends CI_Model
         $user = $this->db->get_where('users', ['username' => $username])->row_array();
         $kelas = $this->db->get_where('biodata', ['username' => $username])->row_array();
 
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                $this->session->set_userdata('login', '1');
-                $this->session->set_userdata('username', $user['username']);
-                $this->session->set_userdata('kelas', $kelas['kelas']);
-                redirect('', 'refresh');
-            }
+        if ($user && password_verify($password, $user['password'])) {
+
+            $this->session->set_userdata('login', '1');
+            $this->session->set_userdata('username', $user['username']);
+            $this->session->set_userdata('kelas', $kelas['kelas']);
+            redirect('', 'refresh');
         } else {
             $this->session->set_flashdata('salah_login', '1');
         }

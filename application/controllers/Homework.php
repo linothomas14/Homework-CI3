@@ -11,14 +11,18 @@ class Homework extends CI_Controller
 	public function index()
 	{
 		if ($this->session->userdata('login') == 1) {
-			$data['assignments'] = $this->M_homework->read()[0];
-			$data['biodata'] = $this->M_homework->read()[1];
-
-			// $this->db->select('kelas');
-			// $data['nama'] = $this->db->get_where('biodata', ['username' => $this->session->userdata('username')]);
-			$this->load->view('core/header', $data);
-			$this->load->view('contents/home');
-			$this->load->view('core/footer');
+			$username = $this->session->userdata('username');
+			$user = $this->db->get_where('biodata', ['username' => $username])->row_array();
+			if ($user) {
+				$data['assignments'] = $this->M_homework->read()[0];
+				$data['biodata'] = $this->M_homework->read()[1];
+				$this->load->view('core/header', $data);
+				$this->load->view('contents/home');
+				$this->load->view('core/footer');
+			} else {
+				$this->session->set_flashdata('register', 'true');
+				redirect('homework/biodata', 'refresh');
+			}
 		} else {
 			$this->session->set_flashdata('belum_login', '2');
 			redirect('homework/login', 'refresh');
@@ -30,12 +34,12 @@ class Homework extends CI_Controller
 		$this->load->view('core/header-login');
 		$this->load->view('login/login');
 		$this->load->view('core/footer');
-		if (isset($_POST['login'])) {
-			$this->M_homework->validateLogin();
-		}
 		if (isset($_POST['register'])) {
 			$this->session->sess_destroy();
-			$this->M_homework->register();
+			redirect('homework/register', 'refresh');
+		}
+		if (isset($_POST['login'])) {
+			$this->M_homework->validateLogin();
 		}
 	}
 
@@ -114,8 +118,8 @@ class Homework extends CI_Controller
 	}
 	public function edit($id)
 	{
-		$id_existed= $this->db->get_where('assignments', ['id' => $id])->row_array();
-		if(!$id_existed){
+		$id_existed = $this->db->get_where('assignments', ['id' => $id])->row_array();
+		if (!$id_existed) {
 			redirect('homework', 'refresh');
 		}
 		if ($this->session->userdata('login') == '1') {
