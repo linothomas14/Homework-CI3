@@ -1,5 +1,5 @@
-<?php 
-if ($assignments['kelas'] != $this->session->userdata('kelas')){
+<?php
+if ($assignments['kelas'] != $this->session->userdata('kelas')) {
     redirect('homework', 'refresh');
 }
 ?>
@@ -10,7 +10,6 @@ if ($assignments['kelas'] != $this->session->userdata('kelas')){
                 <div class="card-header text-center">Edit Data</div>
                 <div class="card-body">
                     <form action="" method="post" class="needs-validation" novalidate>
-                        <?php var_dump($assignments) ?>
                         <input type="" name="id_assignment" value="<?= $assignments['id'] ?>">
                         <div class="form-group">
                             <label for="nama_mhs">Title</label>
