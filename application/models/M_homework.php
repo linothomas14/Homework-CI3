@@ -134,13 +134,12 @@ class M_homework extends CI_Model
             'subject' => $subject,
             'deadline' => $deadline,
             'description' => $description,
+            'poster' => $poster['nama'],
         ];
 
-        $this->db->where('id', $this->input->post('id'));
+        $this->db->where('id', $this->input->post('id_assignment'));
         $this->db->update('assignments', $data);
         if ($this->db->affected_rows() > 0) {
-
-            // masih error disini, dia ga masuk ke if yang affected row
 
             $this->session->set_flashdata('pesan', 'Diubah');
             redirect('homework', 'refresh');
